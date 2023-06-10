@@ -10,6 +10,33 @@ export const hero = {
   bgAlt: 'background color for the car',
 };
 
+export const catalog = {
+  title: 'Car Catalogue',
+  subtitle: 'Discover cars that suit your style',
+};
+
+export const autoMakers = [
+  'Audi',
+  'BMW',
+  'Chevrolet',
+  'Ford',
+  'Honda',
+  'Hyundai',
+  'Jaguar',
+  'Jeep',
+  'Kia',
+  'Lexus',
+  'Mazda',
+  'Mercedes-Benz',
+  'Nissan',
+  'Porsche',
+  'Subaru',
+  'Tesla',
+  'Toyota',
+  'Volkswagen',
+  'Volvo',
+];
+
 export const footerLinks = [
   {
     title: 'About',
