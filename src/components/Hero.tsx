@@ -28,14 +28,14 @@ const Hero = () => {
             fill
             className="object-contain"
           />
-          <div className="hero__image-overlay">
-            <Image
-              src="/hero-bg.svg"
-              alt="hero background"
-              fill
-              className="object-contain"
-            />
-          </div>
+        </div>
+        <div className="hero__image-overlay">
+          <Image
+            src="/hero-bg.svg"
+            alt="hero background"
+            fill
+            className="object-contain"
+          />
         </div>
       </div>
     </div>
