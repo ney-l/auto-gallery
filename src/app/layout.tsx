@@ -1,8 +1,9 @@
 import { Navbar } from '@/components';
 import './globals.css';
+import { brandName } from '@/constants';
 
 export const metadata = {
-  title: 'Auto Gallery',
+  title: brandName,
   description: 'Find the best rides in the world! 🚘🚙',
 };
 
