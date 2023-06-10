@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Button from './Button';
+import { hero } from '@/constants';
 
 const Hero = () => {
   const handleScroll = () => {
@@ -10,12 +11,10 @@ const Hero = () => {
   return (
     <div className="hero">
       <div className="flex-1 pt-36 padding-x">
-        <h1 className="hero__title">Simplify Your Car Rental Journey!</h1>
-        <p className="hero__subtitle">
-          Efforlessly Discover, Rent, and Cruise with Ease!
-        </p>
+        <h1 className="hero__title">{hero.title}</h1>
+        <p className="hero__subtitle">{hero.subtitle}</p>
         <Button
-          label="Discover Cars"
+          label={hero.callToActionTitle}
           containerStyles="bg-primary-blue text-white rounded-full mt-10"
           handleClick={handleScroll}
         />
@@ -23,16 +22,16 @@ const Hero = () => {
       <div className="hero__image-container">
         <div className="hero__image">
           <Image
-            src="/hero.png"
-            alt="A cool car"
+            src={hero.image}
+            alt={hero.imageAlt}
             fill
             className="object-contain"
           />
         </div>
         <div className="hero__image-overlay">
           <Image
-            src="/hero-bg.svg"
-            alt="hero background"
+            src={hero.bg}
+            alt={hero.bgAlt}
             fill
             className="object-contain"
           />
