@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { fetchCarImages } from './fetchCarImages';
 import { Car } from '@/components/catalog/CarCard';
+import { SearchParams } from '@/app/page';
 
 type CarFromAPIResponse = {
   city_mpg: number;
@@ -17,22 +18,39 @@ type CarFromAPIResponse = {
   year: number;
 };
 
-function getCarAPIRequestConfig(model: string) {
+const getFormattedParams = (params: SearchParams) =>
+  Object.entries(params)
+    .filter(([_, value]) => value !== '')
+    .map(([key, value]) => {
+      if (key === 'autoMaker') {
+        return ['make', value];
+      }
+      if (key === 'fuelType') {
+        return ['fuel_type', value];
+      }
+      return [key, value];
+    })
+    .reduce((acc, [key, value]) => {
+      return `${acc}&${key}=${value}`;
+    }, '');
+
+function getCarAPIRequestConfig(params: SearchParams) {
   const apiKey = process.env.CARS_API_KEY;
   const apiUrl = process.env.CARS_API_ENDPOINT;
 
   if (!apiKey || !apiUrl) {
     throw new Error('Missing API key or endpoint');
   }
-  const url = `${apiUrl}/cars?model=${model}`;
+  const url = `${apiUrl}/cars?${getFormattedParams(params)}`;
+
   const headers = {
     'X-Api-Key': apiKey,
   };
   return { url, headers };
 }
 
-export async function fetchCarsFromAPI(model: string) {
-  const { url, headers } = getCarAPIRequestConfig(model);
+export async function fetchCarsFromAPI(params: SearchParams) {
+  const { url, headers } = getCarAPIRequestConfig(params);
   try {
     const response = await axios.get(url, { headers });
 
@@ -53,8 +71,8 @@ export async function fetchCarsFromAPI(model: string) {
   }
 }
 
-const fetchCars = async (model: string) => {
-  const { message, data, isError } = await fetchCarsFromAPI(model);
+const fetchCars = async (params: SearchParams) => {
+  const { message, data, isError } = await fetchCarsFromAPI(params);
   if (isError) {
     return { message };
   }

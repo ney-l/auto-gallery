@@ -3,10 +3,32 @@ import SearchBar from './SearchBar';
 import { catalog } from '@/constants';
 import CarCard from './CarCard';
 import { carService } from '@/services';
+import { SearchParams } from '@/app/page';
 
-const Catalog = async () => {
-  const cars = await carService.fetchCars('carrera');
+type CatalogProps = {
+  searchParams: SearchParams;
+};
 
+const lastYear = new Date().getFullYear() - 1;
+
+const Catalog = async ({ searchParams }: CatalogProps) => {
+  // get params from url
+  const {
+    autoMaker = '',
+    year = lastYear,
+    fuelType = '',
+    limit = 10,
+    model = '',
+  } = searchParams;
+  // fetch cars
+  const cars = await carService.fetchCars({
+    autoMaker,
+    year,
+    fuelType,
+    limit,
+    model,
+  });
+  // check if cars not found
   const isCarsNotFound =
     !cars || !Array.isArray(cars.data) || cars.data.length < 1;
 
