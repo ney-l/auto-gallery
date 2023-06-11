@@ -19,6 +19,12 @@ export type Car = {
   model: string;
   transmission: string;
   year: number;
+  images: {
+    main: string;
+    front: string;
+    top: string;
+    back: string;
+  };
 };
 
 type Props = {
@@ -27,7 +33,7 @@ type Props = {
 
 const CarCard = ({ car }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { cityMpg, carClass, year, make, model, transmission, drive } = car;
+  const { cityMpg, year, make, model, transmission, drive } = car;
   const carRent = carRentCalculator.calculateCarRent(cityMpg, year);
 
   const icons = [
@@ -63,7 +69,7 @@ const CarCard = ({ car }: Props) => {
       </p>
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
-          src="/hero.png"
+          src={car.images.main}
           alt="car model"
           priority
           fill

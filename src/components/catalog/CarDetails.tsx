@@ -32,7 +32,7 @@ const CarDetails = ({ isOpen, closeModal, car }: Props) => {
                 <Dialog.Panel className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white p-6 text-left shadow-xl transition-all flex flex-col gap-5">
                   <CloseButton onCloseModal={closeModal} />
 
-                  <CarImages />
+                  <CarImages images={car.images} />
 
                   <div className="flex-1 flex flex-col gap-2">
                     <h2 className="font-semibold text-xl capitalize">
@@ -81,21 +81,23 @@ const CloseButton = ({ onCloseModal }: { onCloseModal: () => void }) => (
   </button>
 );
 
-const CarImages = () => (
+type CarImagesProps = Pick<Car, 'images'>;
+
+const CarImages = ({ images }: CarImagesProps) => (
   <div className="flex-1 flex flex-col gap-3">
-    <CarMainImage />
+    <CarMainImage imageUrl={images.main} />
     <div className="flex gap-3">
-      <CarImage />
-      <CarImage />
-      <CarImage />
+      <CarImage imageUrl={images.front} />
+      <CarImage imageUrl={images.top} />
+      <CarImage imageUrl={images.back} />
     </div>
   </div>
 );
 
-const CarMainImage = () => (
+const CarMainImage = ({ imageUrl }: { imageUrl: string }) => (
   <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
     <Image
-      src="/hero.png"
+      src={imageUrl}
       alt="car model"
       priority
       fill
@@ -104,10 +106,10 @@ const CarMainImage = () => (
   </div>
 );
 
-const CarImage = () => (
+const CarImage = ({ imageUrl }: { imageUrl: string }) => (
   <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
     <Image
-      src="/hero.png"
+      src={imageUrl}
       alt="car model"
       priority
       fill
@@ -117,8 +119,9 @@ const CarImage = () => (
 );
 
 const DetailsTable = ({ car }: { car: Car }) => {
+  const { images, ...carDetails } = car;
   const formatedCar: Record<string, any> = {};
-  Object.entries(car).forEach(([key, value]) => {
+  Object.entries(carDetails).forEach(([key, value]) => {
     formatedCar[key.split(/(?=[A-Z])/).join(' ')] = value;
   });
 

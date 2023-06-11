@@ -1,4 +1,6 @@
 import axios, { AxiosError } from 'axios';
+import { fetchCarImages } from './fetchCarImages';
+import { Car } from '@/components/catalog/CarCard';
 
 type CarFromAPIResponse = {
   city_mpg: number;
@@ -15,7 +17,7 @@ type CarFromAPIResponse = {
   year: number;
 };
 
-export async function fetchCars(model: string) {
+function getCarAPIRequestConfig(model: string) {
   const apiKey = process.env.CARS_API_KEY;
   const apiUrl = process.env.CARS_API_ENDPOINT;
 
@@ -26,23 +28,61 @@ export async function fetchCars(model: string) {
   const headers = {
     'X-Api-Key': apiKey,
   };
+  return { url, headers };
+}
+
+export async function fetchCarsFromAPI(model: string) {
+  const { url, headers } = getCarAPIRequestConfig(model);
   try {
     const response = await axios.get(url, { headers });
 
     const { data } = response;
-    const formattedCars = formatApiResponse(data);
+
     return {
       message: '',
-      data: formattedCars,
+      data,
+      isError: false,
     };
   } catch (error: AxiosError | any) {
     console.error(error.response.statusText, error.response.data);
     return {
       message: error.response.statusText,
       data: null,
+      isError: true,
     };
   }
 }
+
+const fetchCars = async (model: string) => {
+  const { message, data, isError } = await fetchCarsFromAPI(model);
+  if (isError) {
+    return { message };
+  }
+  const formattedCars = formatApiResponse(data);
+  const carsWithImages = addImages(formattedCars);
+
+  return {
+    message: '',
+    data: carsWithImages,
+  };
+};
+
+export type CarWithoutImages = Omit<Car, 'images'>;
+
+const FRONT_ANGLE = '29';
+const TOP_ANGLE = '33';
+const BACK_ANGLE = '13';
+
+const addImages = (cars: CarWithoutImages[]) =>
+  cars.map((car) => ({
+    ...car,
+    images: {
+      main: fetchCarImages(car),
+      front: fetchCarImages(car, FRONT_ANGLE),
+      top: fetchCarImages(car, TOP_ANGLE),
+      back: fetchCarImages(car, BACK_ANGLE),
+    },
+  }));
 
 const formatApiResponse = (cars: CarFromAPIResponse[]) =>
   cars.map((car) => ({
@@ -59,3 +99,5 @@ const formatApiResponse = (cars: CarFromAPIResponse[]) =>
     transmission: car.transmission,
     year: car.year,
   }));
+
+export { fetchCars };

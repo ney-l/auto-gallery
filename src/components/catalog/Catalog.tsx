@@ -23,7 +23,7 @@ const Catalog = async () => {
       {isCarsNotFound ? (
         <div className="mt-16 flex justify-center items-center flex-col gap-2">
           <h2>Oops, no results found</h2>
-          <p>{cars?.message}</p>
+          <p>{cars.message}</p>
         </div>
       ) : (
         <section>
