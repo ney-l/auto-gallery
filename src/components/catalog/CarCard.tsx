@@ -4,22 +4,25 @@ import { carRentCalculator } from '@/services';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import Button from '../Button';
+import CarDetails from './CarDetails';
+
+export type Car = {
+  cityMpg: number;
+  carClass: string;
+  combinationMpg: number;
+  cylinders: number;
+  displacement: number;
+  drive: string;
+  fuelType: string;
+  highwayMpg: number;
+  make: string;
+  model: string;
+  transmission: string;
+  year: number;
+};
 
 type Props = {
-  car: {
-    cityMpg: number;
-    carClass: string;
-    combinationMpg: number;
-    cylinders: number;
-    displacement: number;
-    drive: string;
-    fuelType: string;
-    highwayMpg: number;
-    make: string;
-    model: string;
-    transmission: string;
-    year: number;
-  };
+  car: Car;
 };
 
 const CarCard = ({ car }: Props) => {
@@ -90,6 +93,12 @@ const CarCard = ({ car }: Props) => {
           />
         </div>
       </div>
+
+      <CarDetails
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+        car={car}
+      />
     </div>
   );
 };
