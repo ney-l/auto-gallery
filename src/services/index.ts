@@ -1,3 +1,4 @@
 import carRentCalculator from './carRentCalculator';
+import carService from './carService';
 
-export { carRentCalculator };
+export { carRentCalculator, carService };

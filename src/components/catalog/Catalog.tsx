@@ -2,69 +2,10 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import { catalog } from '@/constants';
 import CarCard from './CarCard';
+import { carService } from '@/services';
 
-const Catalog = () => {
-  const cars = {
-    message: '',
-    data: [
-      {
-        cityMpg: 23,
-        carClass: 'compact car',
-        combinationMpg: 24,
-        cylinders: 4,
-        displacement: 1.6,
-        drive: 'fwd',
-        fuelType: 'gas',
-        highwayMpg: 26,
-        make: 'toyota',
-        model: 'corolla',
-        transmission: 'a',
-        year: 1993,
-      },
-      {
-        cityMpg: 23,
-        carClass: 'compact car',
-        combinationMpg: 26,
-        cylinders: 4,
-        displacement: 1.6,
-        drive: 'fwd',
-        fuelType: 'gas',
-        highwayMpg: 31,
-        make: 'toyota',
-        model: 'corolla',
-        transmission: 'm',
-        year: 1993,
-      },
-      {
-        cityMpg: 23,
-        carClass: 'compact car',
-        combinationMpg: 25,
-        cylinders: 4,
-        displacement: 1.8,
-        drive: 'fwd',
-        fuelType: 'gas',
-        highwayMpg: 30,
-        make: 'toyota',
-        model: 'corolla',
-        transmission: 'a',
-        year: 1993,
-      },
-      {
-        cityMpg: 23,
-        carClass: 'compact car',
-        combinationMpg: 26,
-        cylinders: 4,
-        displacement: 1.8,
-        drive: 'fwd',
-        fuelType: 'gas',
-        highwayMpg: 30,
-        make: 'toyota',
-        model: 'corolla',
-        transmission: 'm',
-        year: 1993,
-      },
-    ],
-  };
+const Catalog = async () => {
+  const cars = await carService.fetchCars('carrera');
 
   const isCarsNotFound =
     !cars || !Array.isArray(cars.data) || cars.data.length < 1;
@@ -87,9 +28,8 @@ const Catalog = () => {
       ) : (
         <section>
           <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14">
-            {cars.data.map((car, index) => (
-              <CarCard car={car} key={index} />
-            ))}
+            {cars.data &&
+              cars.data.map((car, index) => <CarCard car={car} key={index} />)}
           </div>
         </section>
       )}
