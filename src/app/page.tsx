@@ -13,6 +13,8 @@ export default function Home({ searchParams }: { searchParams: SearchParams }) {
     <main className="overflow-hidden">
       <Hero />
 
+      {/* this workaround is necessary due to this Next.js bug: https://github.com/vercel/next.js/issues/42292 */}
+      {/* @ts-expect-error Server Component */}
       <Catalog searchParams={searchParams} />
     </main>
   );
