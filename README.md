@@ -27,7 +27,7 @@ The project is built using the following technologies and libraries:
 
 - Browse a variety of rental cars 🚗
 - Compare rental prices from different providers 💰
-- Customize search using filters
+- Customize search using filters 🔎
 - User-friendly design and navigation 🌐
 
 ## Getting Started 🚀
@@ -38,15 +38,15 @@ Before you begin, ensure you have met the following requirements:
 
 - You have installed Node.js and npm.
 - You have a basic understanding of TypeScript and React.
-- You have signed up for an account with [API NINJAS](https://api-ninjas.com/) and obtained your API Key
-- You have also signed up for an account with [IMAGIN STUDIO](https://www.imagin.studio/car-image-api) and obtained your API Key
+- You have signed up for an account with [API NINJAS](https://api-ninjas.com/) and obtained your API Key.
+- You have also signed up for an account with [IMAGIN STUDIO](https://www.imagin.studio/car-image-api) and obtained your API Key.
 
 ### Installation
 
 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/auto-gallery.git
+git clone https://github.com/ney-l/auto-gallery.git
 ```
 
 2. Install NPM packages
@@ -90,7 +90,7 @@ Due to a known bug in Next.js [#42292](https://github.com/vercel/next.js/issues/
 
 ### Issue 2
 
-I faced an issue [#49087](https://github.com/vercel/next.js/issues/49087) where the scroll position was being reset when search parameters were updated. Due to this issue, I had to downgrade the version of Next.js I am using.
+I faced the issue [#49087](https://github.com/vercel/next.js/issues/49087) where the scroll position was being reset when search parameters were updated. Due to this issue, I had to downgrade the version of Next.js I am using.
 
 The issue, [NEXT-1147](https://github.com/vercel/next.js/issues/49087), 'Scroll position is reset when search params are updated', is still open as of June 12, 2023.
 
