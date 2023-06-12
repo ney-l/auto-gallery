@@ -2,7 +2,7 @@ export const brandName = 'Auto Gallery';
 
 export const hero = {
   title: 'Simplify Your Car Rental Journey!',
-  subtitle: 'Efforlessly Discover, Rent, and Cruise with Ease!',
+  subtitle: 'Effortlessly Discover, Rent, and Cruise with Ease!',
   callToActionTitle: 'Discover Cars',
   image: '/hero.png',
   imageAlt: 'A cool car',
