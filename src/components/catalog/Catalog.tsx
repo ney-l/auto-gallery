@@ -5,6 +5,7 @@ import CarCard from './CarCard';
 import { carService } from '@/services';
 import { SearchParams } from '@/app/page';
 import Filter from './Filter';
+import ShowMore from './ShowMore';
 
 type CatalogProps = {
   searchParams: SearchParams;
@@ -32,6 +33,9 @@ const Catalog = async ({ searchParams }: CatalogProps) => {
   // check if cars not found
   const isCarsNotFound =
     !cars || !Array.isArray(cars.data) || cars.data.length < 1;
+
+  const pageNumber = (searchParams.limit || 10) / 10;
+  const isNext = (searchParams.limit || 10) > cars.data.length;
 
   return (
     <div className="mt-12 padding-x padding-y max-width" id="discover">
@@ -61,6 +65,8 @@ const Catalog = async ({ searchParams }: CatalogProps) => {
             {cars.data &&
               cars.data.map((car, index) => <CarCard car={car} key={index} />)}
           </div>
+
+          <ShowMore pageNumber={pageNumber} isNext={isNext} />
         </section>
       )}
     </div>
