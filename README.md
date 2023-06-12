@@ -1,34 +1,100 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Auto Gallery 🚗
 
-## Getting Started
+Welcome to Auto Gallery - **Simplify Your Car Rental Journey**
 
-First, run the development server:
+![Hero](docs/hero.png)
+
+## Effortlessly Discover, Rent, and Cruise with Ease! 🏎️
+
+Check out the live site here: <https://auto-gallery.vercel.app>
+
+Auto Gallery is the landing page for a next-gen car rental application that allows users to discover, compare, and rent cars in a simplified and convenient manner. Crafted with the latest technologies including TypeScript and Next.js, Auto Gallery provides a seamless user experience for car rental.
+
+![](docs/car-catalogue.png)
+
+## Built with 🛠️
+
+The project is built using the following technologies and libraries:
+
+- TypeScript (5.1.3)
+- Next.js (13.2.4)
+- React (18.2.0)
+- Tailwind CSS (3.3.2)
+- Axios (1.4.0)
+- ESLint (8.42.0)
+
+## Features ⭐
+
+- Browse a variety of rental cars 🚗
+- Compare rental prices from different providers 💰
+- Customize search using filters
+- User-friendly design and navigation 🌐
+
+## Getting Started 🚀
+
+### Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- You have installed Node.js and npm.
+- You have a basic understanding of TypeScript and React.
+- You have signed up for an account with [API NINJAS](https://api-ninjas.com/) and obtained your API Key
+- You have also signed up for an account with [IMAGIN STUDIO](https://www.imagin.studio/car-image-api) and obtained your API Key
+
+### Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/auto-gallery.git
+```
+
+2. Install NPM packages
+
+```bash
+npm install
+```
+
+3. Create a `.env` file in the project root directory and add the following environment variables in it
+
+```env
+CARS_API_KEY=<INSERT YOUR API-NINJAS API KEY HERE>
+CARS_API_ENDPOINT=https://api.api-ninjas.com/v1
+CAR_IMAGES_API_KEY=<INSERT YOUR IMAGIN-STUDIO API KEY HERE>
+CAR_IMAGES_ENDPOINT=https://cdn.imagin.studio/getImage
+```
+
+3. Run the application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Known Issues ⚠️
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This section highlights known issues in the current version of the Auto Gallery project. These bugs are actually Next.js Issues that are still in Open Status as of June 12, 2023.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Issue 1:
 
-## Learn More
+Due to a known bug in Next.js [#42292](https://github.com/vercel/next.js/issues/42292), a workaround is currently implemented in the code. This involves using `@ts-expect-error` for server components that are `async`. The problematic code is:
 
-To learn more about Next.js, take a look at the following resources:
+```jsx
+{
+  /* workaround*/
+}
+{
+  /* @ts-expect-error Server Component */
+}
+<SomeAsyncComponent />;
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Issue 2
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+I faced an issue [#49087](https://github.com/vercel/next.js/issues/49087) where the scroll position was being reset when search parameters were updated. Due to this issue, I had to downgrade the version of Next.js I am using.
 
-## Deploy on Vercel
+The issue, [NEXT-1147](https://github.com/vercel/next.js/issues/49087), 'Scroll position is reset when search params are updated', is still open as of June 12, 2023.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acknowledgments 🎉
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Thanks to the open-source community for all the inspiration and knowledge.
+Happy coding! 💻
