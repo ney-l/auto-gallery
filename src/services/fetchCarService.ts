@@ -57,30 +57,34 @@ export async function fetchCarsFromAPI(params: SearchParams) {
     const { data } = response;
 
     return {
-      message: '',
+      errorMessage: '',
       data,
       isError: false,
     };
   } catch (error: AxiosError | any) {
     console.error(error.response.statusText, error.response.data);
     return {
-      message: error.response.statusText,
+      errorMessage: error.response.statusText,
       data: null,
       isError: true,
     };
   }
 }
+export type FetchCarsResponse = {
+  errorMessage?: string;
+  data: Car[];
+};
 
-const fetchCars = async (params: SearchParams) => {
-  const { message, data, isError } = await fetchCarsFromAPI(params);
+const fetchCars = async (params: SearchParams): Promise<FetchCarsResponse> => {
+  const { errorMessage, data, isError } = await fetchCarsFromAPI(params);
   if (isError) {
-    return { message, data: [] };
+    return { errorMessage, data: [] };
   }
   const formattedCars = formatApiResponse(data);
   const carsWithImages = addImages(formattedCars);
 
   return {
-    message: '',
+    errorMessage: '',
     data: carsWithImages,
   };
 };
