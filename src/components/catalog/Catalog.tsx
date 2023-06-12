@@ -1,9 +1,10 @@
 import React from 'react';
 import SearchBar from './SearchBar';
-import { catalog } from '@/constants';
+import { catalog, fuels, yearOfManufacture } from '@/constants';
 import CarCard from './CarCard';
 import { carService } from '@/services';
 import { SearchParams } from '@/app/page';
+import Filter from './Filter';
 
 type CatalogProps = {
   searchParams: SearchParams;
@@ -41,7 +42,14 @@ const Catalog = async ({ searchParams }: CatalogProps) => {
 
       <div className="mt-12 w-full flex-between items-center flex-wrap gap-5">
         <SearchBar />
+
+        {/* Filters */}
+        <div className="flex justify-start flex-wrap items-center gap-2">
+          <Filter name="fuel" options={fuels} />
+          <Filter name="year" options={yearOfManufacture} />
+        </div>
       </div>
+
       {isCarsNotFound ? (
         <div className="mt-16 flex justify-center items-center flex-col gap-2">
           <h2>Oops, no results found</h2>
