@@ -74,7 +74,7 @@ export async function fetchCarsFromAPI(params: SearchParams) {
 const fetchCars = async (params: SearchParams) => {
   const { message, data, isError } = await fetchCarsFromAPI(params);
   if (isError) {
-    return { message };
+    return { message, data: [] };
   }
   const formattedCars = formatApiResponse(data);
   const carsWithImages = addImages(formattedCars);
